@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" ng-app="icloud">
+<head>
+	<meta charset="UTF-8">
+	<title>iCloud</title>
+	<script src="js/jquery.js"></script>
+	<script src="js/angular.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/index.js"></script>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body ng-controller="mainCtrl">
+<div class="box">
+		<div class="left">
+			<div class="icloud">iColud<span class="icon-font icon-down">提醒事项</span><div class="add icon-font icon-jiahao" ng-click="add()"></div></div>
+			<card-list>
+				<ol><span class="icon-font icon-naozhong"></span>已计划</ol>
+				<li ng-repeat="i in cards" ng-click="setcurrent(i)" data-id='{{i.id}}' class='{{i.theme}}'><div class='yanse'></div><span>{{i.titie}}</span><input ng-model="i.titie" type='text' value='{{i.titie}}'><div class='icon-font icon-jian'></div></li>
+			</card-list>
+			<!--<ul class="left-inner">
+				<card-list ng-repeat="i in cards">
+				</card-list>
+				&lt;!&ndash;<li class="hong"><div class="yanse"></div><span>新列表</span><input type="text" value="默认"><div class="icon-font icon-jian"></div></li>&ndash;&gt;
+			</ul>-->
+		</div>
+		<div class="right">
+			<div class="right-top">
+				<div class="icon-font icon-search"></div>
+				<input  type="text" placeholder="搜索所有提醒">
+				<li class="icon-font icon-wenhao">|&nbsp;</li>
+				<span class="icon-font icon-down" id="name">赵利强</span>
+			</div>
+			<div class="right-bottom"	>
+				<div class="right-bottom-top" >
+					<h3><span class="{{current.theme}}">{{current.titie}}</span> <div class="lists {{current.theme}}" ng-click="dianji()">选项</div></h3>
+					<bian-ji>
+						<div class="bianji-inner">
+							<div class="shang-box">
+								<input type="text" value="{{current.titie}}" ng-model="current.titie" class="{{current.theme}}">
+								<li>列表颜色</li>
+								<ul>
+									<li ng-repeat="q in color" class="{{q}}" ng-class="{active:q == current.theme}"  ng-click="current.theme=q"></li>
+								</ul>
+							</div>
+							<div class="xia-box">
+								<li class="delete">删除</li>
+								<li class="wancheng" ng-click="qu()">完成</li>
+								<span>|</span>
+								<li class="quxiao" ng-click="qu()">取消</li>
+							</div>
+						</div>
+					</bian-ji>
+				</div>
+				<div class="right-bottom-bottom" >
+					<ul class="yiwancheng">
+						<ol><span  ng-click="xiaoshi()"  class="icon-font span1 icon-xiasanjiao"></span><span class="span2">已完成:{{index}}项</span><div class="qingchu" ng-click="clear()">清除已完成事项</div></ol>
+						<div class="content">
+							<li class="{{current.theme}}" ng-repeat="v in current.todos|filter:{status:1}" ><span class="cire {{current.theme}}" ng-click="v.status=0;adds() "></span><div class="iner {{current.theme}}">{{v.title}}</div><input type="text" ng-model="v.title"> <div class="xiangxi" ng-click="delete(v.id)">删除当前</div></li>
+						</div>
+					</ul>
+					<ul class="weiwancheng">
+						<li ng-repeat="v in current.todos|filter:{status:0}" class="{{current.theme}}" ><span class="cire {{current.theme}}" ng-click="v.status=1;jianyi()"></span><div class="iner {{current.theme}}">{{v.title}}</div><input type="text" ng-model="v.title"><div class="xiangxi" ng-click="delete(v.id)">删除当前</div></li>
+						<my-xinceng>
+							<li  class="jia"><span class="cire {{current.theme}}"></span><input type="text"></li>
+							<div class="xinceng">在此新增新的数据</div>
+						</my-xinceng>
+					</ul>
+				</div>
+			</div>
+		</div>
+</div>
+</body>
+</html>
